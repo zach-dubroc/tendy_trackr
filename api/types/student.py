@@ -1,8 +1,7 @@
 import strawberry
 
-
 @strawberry.type
-class Student:
+class Student():
         fname: str
         lname: str
         absences: int
@@ -10,3 +9,4 @@ class Student:
         nocalls: int 
         currentStatus: int
         datesMissed: list[str]
+        

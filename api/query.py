@@ -1,33 +1,26 @@
-#TODO 
-#after db connection is made update mock resolver
+# api/query.py
 import strawberry
-import typing
+from typing import List
+from fastapi import Depends
+from sqlalchemy.orm import Session
 from api.types.student import Student
-
-#mock resolver
-def get_students(self):
-    return [
-        Student(
-        fname='pancho',
-        lname='veldez',
-        absences=0,
-        tardy=0,
-        nocalls=0,
-        currentStatus=0,
-        datesMissed=["1902-05-05", "2021-04-20"],
-        ),
-                
-        Student(
-        fname='flaco',
-        lname='elron',
-        absences=0,
-        tardy=0,
-        nocalls=0,
-        currentStatus=0,
-        datesMissed=["1902-05-05", "2021-04-20"],
-        )
-    ]
+from api.models import StudentModel
+from api.database import get_db, DatabaseSession
 
 @strawberry.type
 class Query:
-    students: typing.List[Student] = strawberry.field(resolver=get_students)
+    @strawberry.field
+    def students(self) -> List[Student]:
+        with get_db() as db:  # Using the context manager
+            students = db.query(StudentModel).all()
+            return [
+                Student(
+                    fname=student.fname,
+                    lname=student.lname,
+                    absences=student.absences,
+                    tardy=student.tardy,
+                    nocalls=student.nocalls,
+                    currentStatus=student.currentStatus,
+                    datesMissed=student.datesMissed  # Directly use the JSON array
+                ) for student in students
+            ]
