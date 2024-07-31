@@ -1,11 +1,10 @@
 # api/query.py
 import strawberry
 from typing import List
-from fastapi import Depends
-from sqlalchemy.orm import Session
 from api.types.student import Student
 from api.models import StudentModel
-from api.database import get_db, DatabaseSession
+from api.database import get_db
+
 
 @strawberry.type
 class Query:
@@ -15,6 +14,7 @@ class Query:
             students = db.query(StudentModel).all()
             return [
                 Student(
+                    id=student.id,
                     fname=student.fname,
                     lname=student.lname,
                     absences=student.absences,

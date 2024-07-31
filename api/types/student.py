@@ -2,11 +2,12 @@ import strawberry
 
 @strawberry.type
 class Student():
-        fname: str
-        lname: str
-        absences: int
-        tardy: int
-        nocalls: int 
-        currentStatus: int
-        datesMissed: list[str]
+            id: strawberry.ID = strawberry.field(description="id")
+            fname: str = strawberry.field(description="first name")
+            lname: str = strawberry.field(description="last name")
+            absences: int = strawberry.field(description="abensce count")
+            tardy: int = strawberry.field(description="tardy count")
+            nocalls: int = strawberry.field(description="no call count")
+            currentStatus: int = strawberry.field(description="status")
+            datesMissed: list[str] = strawberry.field(description="list of absence dates")
         
