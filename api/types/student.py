@@ -1,3 +1,4 @@
+# api/types/student.py
 import strawberry
 
 @strawberry.type

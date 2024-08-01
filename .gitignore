@@ -1,4 +1,37 @@
-/env
-env/
+# Python
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment variables
 .env
-env
+
+# Database
+*.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# Pytest
+.cache/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Environments
+.env/
+.venv/
+venv/
+ENV/
+env.bak/
+venv.bak/

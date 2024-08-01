@@ -1,3 +1,4 @@
+# api/types/add_student.py
 import strawberry
 
 @strawberry.input

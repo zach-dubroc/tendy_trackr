@@ -23,4 +23,3 @@ app.include_router(graphql_app, prefix="/api")
 @app.get("/")
 def read_root():
     return {"message": "hi, I am endpoint"}
-

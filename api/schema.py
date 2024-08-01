@@ -1,4 +1,4 @@
-# schema.py
+# api/schema.py
 import strawberry
 from api.mutations import Mutation
 
