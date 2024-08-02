@@ -2,8 +2,10 @@
 import strawberry
 from sqlalchemy.orm import Session
 from api.types.student import Student
+from api.types.user import User, AuthPayload
 from api.types.add_student import AddStudentInput
 from api.models import StudentModel
+from api.auth import create_user, authenticate_user, create_access_token
 
 
 @strawberry.type
@@ -48,3 +50,21 @@ class Mutation:
         except Exception as e:
             raise Exception(f"database error: {str(e)}")
         return f"student id#{id}: {student.fname} {student.lname} has been deleted"
+    
+@strawberry.type
+class AuthMutation:
+    @strawberry.mutation
+    def register(self, username: str, email: str, password: str, info: strawberry.types.Info)-> User:
+        db: Session = info.context["db"]
+        user = create_user(db, username, email, password)
+        access_token = create_access_token(data={"sub": user.username})
+        return {"access_token": access_token, "token_type": "bearer"}
+    
+    @strawberry.mutation
+    def login(self, username: str, password: str, info: strawberry.types.Info) -> AuthPayload:
+        db: Session = info.context["db"]
+        user = authenticate_user(db, username, password)
+        if not user:
+            raise Exception("Invalied creds bruh")
+        access_token = create_access_token(data={"sub": user.username})
+        return AuthPayload(user=User(id=user.id, username = user.username, email=user.email), access_token=access_token)
