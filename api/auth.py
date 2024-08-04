@@ -13,7 +13,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
 
-pwd_context = CryptContext(schemes=["bcrypt"], depreceated="auto")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 #auth functions
 def get_password_hash(password):
