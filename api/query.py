@@ -24,3 +24,20 @@ class Query:
                     datesMissed=student.datesMissed  # Directly use the JSON array
                 ) for student in students
             ]
+    @strawberry.field
+    def student(self, id: int) -> Student:
+        with get_db() as db:  # Using the context manager
+            student = db.query(StudentModel).filter(StudentModel.id == id).first()
+            if student:
+                return Student(
+                    id=student.id,
+                    fname=student.fname,
+                    lname=student.lname,
+                    absences=student.absences,
+                    tardy=student.tardy,
+                    nocalls=student.nocalls,
+                    currentStatus=student.currentStatus,
+                    datesMissed=student.datesMissed  # Directly use the JSON array
+                )
+            return None
+
