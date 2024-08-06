@@ -4,6 +4,9 @@ from sqlalchemy import create_engine
 from contextlib import contextmanager
 import os
 from dotenv import load_dotenv
+import pymysql
+
+pymysql.install_as_MySQLdb()
 
 load_dotenv()
 

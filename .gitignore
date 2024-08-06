@@ -39,5 +39,6 @@ venv.bak/
 
 
 
-# Ignore test connection script
+# Ignore db scripts
 test_db.py
+create_tables.py

@@ -2,7 +2,10 @@ strawberry-graphql
 uvicorn
 fastapi
 sqlalchemy
-mysqlclient
+pymysql
 pyjwt
 passlib[bcrypt]
 python-dotenv
+mysql-connector-python
+
+
