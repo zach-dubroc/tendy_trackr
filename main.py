@@ -7,7 +7,7 @@ from api.schema import schema
 from api.database import SessionLocal
 from sqlalchemy.orm import Session
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
+# update .env
 def get_db():
     db = SessionLocal()
     try:
