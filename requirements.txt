@@ -8,4 +8,5 @@ passlib[bcrypt]
 python-dotenv
 mysql-connector-python
 pydantic[email]
-
+email-validator
+python-multipart
