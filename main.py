@@ -11,15 +11,14 @@ import uvicorn
 import os
 from dotenv import load_dotenv
 
-# grab .env values
+# grab .env 
 load_dotenv()
-# Determine the environment
+
 ENV = os.getenv("ENV", "development")
 PORT = int(os.getenv("PORT", 8000 if ENV == "development" else 80))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
-# update .env again
 def get_db():
     db = SessionLocal()
     try:
