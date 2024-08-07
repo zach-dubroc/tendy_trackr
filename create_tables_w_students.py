@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Database connection details
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = "mysql://root:xgCJNRjhdiWtAHqTjzxCgVKuvkmVvPqb@monorail.proxy.rlwy.net:46319/railway"
 
 # Parse the DATABASE_URL to extract connection details
 # Format: mysql://username:password@host:port/database
@@ -55,11 +55,12 @@ CREATE TABLE IF NOT EXISTS users (
 );
 """
 
-
 # SQL commands to insert test students
 insert_test_students = """
 INSERT INTO students (fname, lname, absences, tardy, nocalls, currentStatus, datesMissed)
-VALUES (%s, %s, %s, %s, %s, %s, %s)
+VALUES
+    ("Zack", "Dubroc", 0, 0, 0, 1, '[]'),
+    ("Margarito", "Valencia", 0, 0, 0, 1, '[]');
 """
 
 # Test student data
@@ -70,8 +71,9 @@ students = [
 
 # Execute SQL commands
 try:
-    cursor.execute(create_students_table)
-    cursor.execute(create_users_table)
+    #cursor.execute(create_students_table)
+    #cursor.execute(create_users_table)
+    cursor.execute(insert_test_students)
     connection.commit()
     print("Tables created successfully")
 except mysql.connector.Error as err:
