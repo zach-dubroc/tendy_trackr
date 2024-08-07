@@ -7,11 +7,17 @@ from api.auth import create_user, authenticate_user, create_access_token, UserCr
 from api.schema import schema
 from api.database import SessionLocal
 from sqlalchemy.orm import Session
+import uvicorn
+import os
+from dotenv import load_dotenv
 
+# grab .env values
+load_dotenv()
+# Determine the environment
+ENV = os.getenv("ENV", "development")
+PORT = int(os.getenv("PORT", 8000 if ENV == "development" else "production"))
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-
 
 # update .env again
 def get_db():
@@ -63,3 +69,7 @@ def protected(token: str = Depends(oauth2_scheme)):
 
 
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=PORT)
+
+    
