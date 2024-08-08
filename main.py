@@ -1,4 +1,8 @@
 # main.py
+# test query for postman @  https://tendytrackrbackend-production.up.railway.app/api
+# {
+#     "query": "{ students { fname lname datesMissed} }"
+# }
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -35,9 +39,6 @@ graphql_app = GraphQLRouter(schema, context_getter=get_context)
 #graphql here
 app.include_router(graphql_app, prefix="/api")
 
-
-
-
 @app.get("/")
 def read_root():
     return {"message": "hi, I am endpoint"}
@@ -65,7 +66,6 @@ def unprotected():
 @app.get("/protected")
 def protected(token: str = Depends(oauth2_scheme)):
     return {"message": "You are authenticated"}
-
 
 
 if __name__ == "__main__":
