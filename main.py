@@ -4,6 +4,11 @@
 #     "query": "{ students { fname lname datesMissed} }"
 # }
 
+# test mutation to add a student
+# {
+#   "query": "mutation { createStudent(input: { fname: \"Jimmy\", lname: \"Neutron\", absences: 0, tardy: 0, nocalls: 0, currentStatus: 1, datesMissed: [\"2024-01-01\", \"2024-01-15\", \"2024-02-01\"] }) { id fname lname absences tardy nocalls currentStatus datesMissed } }"
+# }
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from strawberry.fastapi import GraphQLRouter
