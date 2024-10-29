@@ -42,3 +42,5 @@ venv.bak/
 # Ignore db scripts
 test_db.py
 create_tables_w_students.py
+/api
+/api

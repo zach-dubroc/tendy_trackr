@@ -10,6 +10,7 @@
 # }
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from strawberry.fastapi import GraphQLRouter
 from api.auth import create_user, authenticate_user, create_access_token, UserCreate, UserAuthenticate
@@ -43,6 +44,15 @@ graphql_app = GraphQLRouter(schema, context_getter=get_context)
 
 #graphql here
 app.include_router(graphql_app, prefix="/api")
+
+#middleware(CORS) Config
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Replace with your Next.js frontend URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
