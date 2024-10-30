@@ -15,6 +15,7 @@ from strawberry.fastapi import GraphQLRouter
 from api.auth import create_user, authenticate_user, create_access_token, UserCreate, UserAuthenticate
 from api.schema import schema
 from api.database import SessionLocal
+from api.models import StudentModel
 from sqlalchemy.orm import Session
 import uvicorn
 import os
@@ -72,6 +73,15 @@ def unprotected():
 def protected(token: str = Depends(oauth2_scheme)):
     return {"message": "You are authenticated"}
 
+
+#all students
+@app.get("/stds")
+def list_students(db: Session = Depends(get_db)):
+    students = db.query(StudentModel).all()
+    return [{"id": student.id, "fname": student.fname, "lname": student.lname, 
+             "absences": student.absences, "tardy": student.tardy,
+             "nocalls": student.nocalls, "currentStatus": student.currentStatus,
+             "datesMissed": student.datesMissed} for student in students]
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=PORT)
