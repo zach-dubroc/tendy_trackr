@@ -1,5 +1,6 @@
 #api/auth.py
 #not used yet, re-factor after login page
+#env vars need to be shared w railway still
 #will wrap /api endpoint in /protected
 import os 
 import jwt

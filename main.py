@@ -9,6 +9,8 @@
 #   "query": "mutation { createStudent(input: { fname: \"Jimmy\", lname: \"Neutron\", absences: 0, tardy: 0, nocalls: 0, currentStatus: 1, datesMissed: [\"2024-01-01\", \"2024-01-15\", \"2024-02-01\"] }) { id fname lname absences tardy nocalls currentStatus datesMissed } }"
 # }
 
+
+
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
