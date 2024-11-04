@@ -27,7 +27,7 @@ load_dotenv()
 
 ENV = os.getenv("ENV", "development")
 PORT = int(os.getenv("PORT", 8000 if ENV == "development" else 80))
-
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS") 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def get_db():
@@ -49,7 +49,7 @@ app.include_router(graphql_app, prefix="/api")
 #middleware(CORS) Config
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Replace with your Next.js frontend URL
+    allow_origins=[ALLOWED_ORIGINS],  # frontend url
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
