@@ -51,7 +51,7 @@ app.include_router(graphql_app, prefix="/api")
 #middleware(CORS) Config
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[ALLOWED_ORIGINS],  # frontend url
+    allow_origins=["*"],  # frontend url
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
